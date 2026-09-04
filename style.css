@@ -1,0 +1,153 @@
+@font-face{font-family:RoseVersailles1;src:local('Rose Versailles1'),local('RoseVersailles1');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Doloman;src:local('Doloman Pavljenko'),local('DolomanPavljenkoLight');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:Sensal;src:local('Sensal');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Newston;src:local('Newston Normal'),local('Newston');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:Cruinn;src:local('Cruinn Thin'),local('Cruinn-Thin');font-weight:100;font-style:normal;font-display:swap}
+
+:root{--w:393px;--screen:876px;--h:3981px;--scale:min(1,calc(100vw / 393px));--ink:#151515}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;min-height:100%;background:#111}
+body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.stage{width:min(100vw,var(--w));height:calc(var(--h) * var(--scale));margin:0 auto;position:relative;overflow:hidden;background:#f7f7f5}
+.design{position:relative;width:var(--w);height:var(--h);transform:scale(var(--scale));transform-origin:top left;background:#fff;overflow:hidden}
+
+.screen{position:absolute;left:0;width:393px;overflow:hidden}
+
+/* -------------------------------------------------
+   FIRST FIGMA SCREEN — only the word "Нажми"
+   ------------------------------------------------- */
+.click-screen{top:0;height:876px;background:#f7f7f5;z-index:20}
+.click-bg{position:absolute;inset:0;background:
+  url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat;
+  filter:none;
+}
+.click-bg:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.90)}
+.frame-line{position:absolute;left:23px;right:23px;top:7px;bottom:12px;border:1px solid rgba(255,255,255,.95);z-index:3}
+.click-flower{position:absolute;pointer-events:none;z-index:4}
+.click-flower-top{width:288.44px;height:396.89px;left:86px;top:66px;transform:rotate(-39.4deg);transform-origin:top left}
+.click-flower-bottom{width:284.72px;height:391.76px;left:-19px;top:548px;transform:rotate(129.5deg);transform-origin:top left}
+.click-button{
+  position:absolute;
+  left:0;
+  top:425px;
+  width:393px;
+  height:82px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:var(--ink);
+  font-family:RoseVersailles1,'Times New Roman',serif;
+  font-size:60.35px;
+  line-height:82px;
+  text-align:center;
+  white-space:nowrap;
+  cursor:pointer;
+  z-index:6;
+  -webkit-tap-highlight-color:transparent;
+}
+.click-button:active{transform:scale(.985)}
+.click-screen.hide{pointer-events:none;opacity:0;transition:opacity .35s ease}
+
+/* -------------------------------------------------
+   THE INVITATION — Figma frame dimensions preserved
+   ------------------------------------------------- */
+.invitation{top:876px;height:876px}
+.paper,.photo-bg{position:absolute;inset:0}
+.top-photo{left:-95px;top:-50px;width:521px;height:926px;background:url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat}
+.top-paper{background:rgba(255,255,255,.91)}
+
+.flower{position:absolute;pointer-events:none;z-index:3}
+.flower-top{width:288.44px;height:396.89px;left:86px;top:66px;transform:rotate(-39.4deg);transform-origin:top left}
+.flower-top-left{width:284.72px;height:391.76px;left:-19px;top:548px;transform:rotate(129.5deg);transform-origin:top left}
+
+.cover-copy{position:absolute;inset:0;z-index:5;color:var(--ink);text-align:left}
+
+.name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: RoseVersailles1, 'Times New Roman', serif;
+    font-size: 51.571px;
+    line-height: 70px;
+    white-space: nowrap;
+}
+
+.name-groom {
+    top: 360px;
+}
+
+.ampersand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 437px;
+    font-family: Newston, Georgia, serif;
+    font-size: 54px;
+    line-height: 55px;
+}
+
+.name-bride {
+    top: 477.96px;
+}
+
+.invite-label {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 569px;
+    font-family: Sensal, Arial, sans-serif;
+    font-size: 9.2px;
+    line-height: 21px;
+    white-space: nowrap;
+}
+
+.date {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 594px;
+    font-family: Cruinn, 'Arial Narrow', Arial, sans-serif;
+    font-size: 26.96px;
+    font-weight: 100;
+    line-height: 28px;
+    letter-spacing: .1px;
+    white-space: nowrap;
+}
+
+.script{font-family:RoseVersailles1,'Times New Roman',serif;font-weight:400;color:var(--ink)}
+.heading{position:absolute;white-space:nowrap}
+.body{font-family:Doloman,Arial,sans-serif;font-weight:300;color:var(--ink);margin:0}
+
+/* middle starts immediately after the invitation cover */
+.middle{top:1752px;height:1351px}
+.marble-paper{background:rgba(255,255,255,.71) url('assets/712009eecc960045da531e87a6c67feb47c7be3f') center/cover no-repeat}
+.middle-flower-1{width:288.44px;height:396.89px;left:132px;top:586px;transform:rotate(-39.4deg);transform-origin:top left;opacity:.98}
+.middle-flower-2{width:284.72px;height:391.76px;left:15.92px;top:1047px;transform:rotate(129.5deg);transform-origin:top left;opacity:.98}
+.guests{left:54px;top:93px;width:294px;text-align:center;font-size:36.874px;line-height:50px}
+.intro-text{position:absolute;left:77px;top:161px;width:245px;height:89px;text-align:center;font-size:14.781px;line-height:22.25px}
+.ring-card{position:absolute;left:77px;top:300px;width:247px;height:370.5px;overflow:hidden;border-radius:2px;z-index:4}
+.ring-card img{width:100%;height:100%;object-fit:cover;display:block}
+.star{position:absolute;left:55px;top:280px;width:46px;height:46px;font-size:32px;line-height:46px;text-align:center;z-index:5;color:#777}
+.venue-title{left:86px;top:781px;width:220px;text-align:center;font-size:26.165px;line-height:70px}
+.venue-photo{position:absolute;left:46px;top:868px;width:309px;height:309px;overflow:hidden;border-radius:50%;z-index:4}
+.venue-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.venue-info{position:absolute;left:46px;top:1184px;width:303px;height:64px;text-align:left;font-size:14.676px;line-height:32px;z-index:5}
+.vine{position:absolute;pointer-events:none;z-index:2;opacity:.9}
+.vine-left{width:132px;height:497px;left:347px;top:639px;transform:rotate(-90deg);transform-origin:top left}
+.venue-vine{position:absolute;left:-16px;top:1300px;width:256px;height:491px;transform:rotate(-8.8deg);z-index:2;overflow:hidden;opacity:.95}
+.venue-vine img{width:100%;height:100%;object-fit:contain}
+
+/* final screen */
+.final{top:3103px;height:878px}
+.bottom-photo{left:0;top:12px;width:521px;height:926px;background:url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat}
+.bottom-paper{background:rgba(255,255,255,.91)}
+.flower-bottom-right{width:288.44px;height:396.89px;left:132px;top:112px;transform:rotate(-39.4deg);transform-origin:top left}
+.flower-bottom-left{width:284.72px;height:391.76px;left:15.92px;top:573px;transform:rotate(129.5deg);transform-origin:top left}
+.waiting{left:41px;top:470px;width:333px;text-align:center;font-size:38.74px;line-height:52px}
+.note{position:absolute;left:99.25px;top:527.63px;width:193.55px;text-align:center;font-family:Doloman,Arial,sans-serif;font-size:20.659px;font-weight:300;line-height:20px;white-space:nowrap}
+
+@media (min-width:394px){
+  body{padding:30px 0}
+  .stage{box-shadow:0 12px 50px rgba(0,0,0,.18)}
+}
