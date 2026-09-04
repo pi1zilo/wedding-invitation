@@ -1,153 +1,688 @@
-@font-face{font-family:RoseVersailles1;src:local('Rose Versailles1'),local('RoseVersailles1');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:Doloman;src:local('Doloman Pavljenko'),local('DolomanPavljenkoLight');font-weight:300;font-style:normal;font-display:swap}
-@font-face{font-family:Sensal;src:local('Sensal');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:Newston;src:local('Newston Normal'),local('Newston');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:Cruinn;src:local('Cruinn Thin'),local('Cruinn-Thin');font-weight:100;font-style:normal;font-display:swap}
+/* ==========================================================================
+   Wedding Invitation — Stylesheet
+   Project: Айзирек & Таштемир — приглашение
+   ========================================================================== */
 
-:root{--w:393px;--screen:876px;--h:3981px;--scale:min(1,calc(100vw / 393px));--ink:#151515}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-html,body{margin:0;padding:0;min-height:100%;background:#111}
-body{overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.stage{width:min(100vw,var(--w));height:calc(var(--h) * var(--scale));margin:0 auto;position:relative;overflow:hidden;background:#f7f7f5}
-.design{position:relative;width:var(--w);height:var(--h);transform:scale(var(--scale));transform-origin:top left;background:#fff;overflow:hidden}
+/* ==========================================================================
+   1. FONTS — подключенные шрифты
+   ========================================================================== */
 
-.screen{position:absolute;left:0;width:393px;overflow:hidden}
-
-/* -------------------------------------------------
-   FIRST FIGMA SCREEN — only the word "Нажми"
-   ------------------------------------------------- */
-.click-screen{top:0;height:876px;background:#f7f7f5;z-index:20}
-.click-bg{position:absolute;inset:0;background:
-  url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat;
-  filter:none;
+@font-face {
+  font-family: 'RoseVersailles1';
+  src: url('fonts/roseversailles1.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
-.click-bg:after{content:"";position:absolute;inset:0;background:rgba(255,255,255,.90)}
-.frame-line{position:absolute;left:23px;right:23px;top:7px;bottom:12px;border:1px solid rgba(255,255,255,.95);z-index:3}
-.click-flower{position:absolute;pointer-events:none;z-index:4}
-.click-flower-top{width:288.44px;height:396.89px;left:86px;top:66px;transform:rotate(-39.4deg);transform-origin:top left}
-.click-flower-bottom{width:284.72px;height:391.76px;left:-19px;top:548px;transform:rotate(129.5deg);transform-origin:top left}
-.click-button{
-  position:absolute;
-  left:0;
-  top:425px;
-  width:393px;
-  height:82px;
-  padding:0;
-  border:0;
-  background:transparent;
-  color:var(--ink);
-  font-family:RoseVersailles1,'Times New Roman',serif;
-  font-size:60.35px;
-  line-height:82px;
-  text-align:center;
-  white-space:nowrap;
-  cursor:pointer;
-  z-index:6;
-  -webkit-tap-highlight-color:transparent;
+
+@font-face {
+  font-family: 'Doloman';
+  src: url('fonts/DolomanPavljenko.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
-.click-button:active{transform:scale(.985)}
-.click-screen.hide{pointer-events:none;opacity:0;transition:opacity .35s ease}
 
-/* -------------------------------------------------
-   THE INVITATION — Figma frame dimensions preserved
-   ------------------------------------------------- */
-.invitation{top:876px;height:876px}
-.paper,.photo-bg{position:absolute;inset:0}
-.top-photo{left:-95px;top:-50px;width:521px;height:926px;background:url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat}
-.top-paper{background:rgba(255,255,255,.91)}
+@font-face {
+  font-family: 'Sensal';
+  src: url('fonts/Sensal Regular (RUS by Slavchansky)_0.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-.flower{position:absolute;pointer-events:none;z-index:3}
-.flower-top{width:288.44px;height:396.89px;left:86px;top:66px;transform:rotate(-39.4deg);transform-origin:top left}
-.flower-top-left{width:284.72px;height:391.76px;left:-19px;top:548px;transform:rotate(129.5deg);transform-origin:top left}
+@font-face {
+  font-family: 'Cruinn';
+  src: url('fonts/Cruinn Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
 
-.cover-copy{position:absolute;inset:0;z-index:5;color:var(--ink);text-align:left}
+/* Newston шрифт не поставляется в проекте — используем fallback на Georgia/serif */
 
+/* ==========================================================================
+   2. CSS VARIABLES — основные настройки проекта
+   ========================================================================== */
+
+:root {
+  /* Layout — размеры макета */
+  --width: 393px;
+  --screen-height: 876px;
+  --total-height: 3981px;
+  --scale: min(1, calc(100vw / 393px));
+
+  /* Colors — цвета */
+  --ink: #151515;
+  --bg-page: #111;
+  --bg-stage: #f7f7f5;
+  --bg-white: #fff;
+  --overlay-white: rgba(255, 255, 255, 0.90);
+  --overlay-paper: rgba(255, 255, 255, 0.91);
+  --overlay-paper-translucent: rgba(255, 255, 255, 0.71);
+  --frame-border: rgba(255, 255, 255, 0.95);
+  --star-color: #777;
+
+  /* Typography — шрифты */
+  --font-rose: 'RoseVersailles1', 'Times New Roman', serif;
+  --font-doloman: 'Doloman', Arial, sans-serif;
+  --font-sensal: 'Sensal', Arial, sans-serif;
+  --font-cruinn: 'Cruinn', 'Arial Narrow', Arial, sans-serif;
+  --font-newston: 'Newston', Georgia, serif;
+}
+
+/* ==========================================================================
+   3. RESET & BASE — сброс стилей и базовые настройки
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg-page);
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   4. LAYOUT — контейнеры макета
+   ========================================================================== */
+
+/* Stage — визуальный контейнер, центрирует design на экране */
+.stage {
+  width: min(100vw, var(--width));
+  height: calc(var(--total-height) * var(--scale));
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-stage);
+}
+
+/* Design — фиксированный макет 393×3981, масштабируется через transform */
+.design {
+  position: relative;
+  width: var(--width);
+  height: var(--total-height);
+  transform: scale(var(--scale));
+  transform-origin: top left;
+  background: var(--bg-white);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   5. COMMON — общие стили для экранов и типографики
+   ========================================================================== */
+
+/* Экран — базовый блок для каждого экрана */
+.screen {
+  position: absolute;
+  left: 0;
+  width: 393px;
+  overflow: hidden;
+}
+
+/* Типографика — общий стиль шрифтов */
+.script {
+  font-family: var(--font-rose);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.heading {
+  position: absolute;
+  white-space: nowrap;
+}
+
+.body {
+  font-family: var(--font-doloman);
+  font-weight: 300;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Фоновые слои — фото и бумага */
+.paper,
+.photo-bg {
+  position: absolute;
+  inset: 0;
+}
+
+/* Цветочные декорации — общий стиль */
+.flower {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Лоза — общий стиль */
+.vine {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+/* ==========================================================================
+   6. SCREEN 1 — Заставка "Нажми"
+   ========================================================================== */
+
+/* Заставка — контейнер первого экрана */
+.click-screen {
+  top: 0;
+  height: 876px;
+  background: var(--bg-stage);
+  z-index: 20;
+}
+
+/* Фон заставки — изображение с белым наложением */
+.click-bg {
+  position: absolute;
+  inset: 0;
+  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
+}
+
+.click-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-white);
+}
+
+/* Декоративная рамка — обводка по краям экрана */
+.frame-line {
+  position: absolute;
+  left: 23px;
+  right: 23px;
+  top: 7px;
+  bottom: 12px;
+  border: 1px solid var(--frame-border);
+  z-index: 3;
+}
+
+/* Цветочные декорации на заставке — общий стиль */
+.click-flower {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Цветок — верхний правый угол */
+.click-flower-top {
+  width: 288.44px;
+  height: 396.89px;
+  left: 86px;
+  top: 66px;
+  transform: rotate(-39.4deg);
+  transform-origin: top left;
+}
+
+/* Цветок — нижний левый угол */
+.click-flower-bottom {
+  width: 284.72px;
+  height: 391.76px;
+  left: -19px;
+  top: 548px;
+  transform: rotate(129.5deg);
+  transform-origin: top left;
+}
+
+/* Цветок — дополнительный, нижний левый угол */
+.click-flower-bottom-extra {
+  width: 180px;
+  height: 250px;
+  left: 30px;
+  top: 650px;
+  transform: rotate(39.4deg);
+  transform-origin: top left;
+}
+
+/* Кнопка "Нажми" — основная кнопка перехода */
+.click-button {
+  position: absolute;
+  left: 0;
+  top: 425px;
+  width: 393px;
+  height: 82px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-rose);
+  font-size: 60.35px;
+  line-height: 82px;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  z-index: 6;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.click-button:active {
+  transform: scale(0.985);
+}
+
+/* Состояние заставки — после нажатия кнопки */
+.click-screen.hide {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   7. SCREEN 2 — Обложка приглашения
+   ========================================================================== */
+
+/* Обложка — контейнер второго экрана */
+.invitation {
+  top: 876px;
+  height: 876px;
+}
+
+/* Фоновое фото — смещённое изображение */
+.top-photo {
+  left: -95px;
+  top: -50px;
+  width: 521px;
+  height: 926px;
+  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
+}
+
+/* Полупрозрачная бумага —.overlay поверх фото */
+.top-paper {
+  background: var(--overlay-paper);
+}
+
+/* Цветочные декорации на обложке */
+.flower-top {
+  width: 288.44px;
+  height: 396.89px;
+  left: 86px;
+  top: 66px;
+  transform: rotate(-39.4deg);
+  transform-origin: top left;
+}
+
+.flower-top-left {
+  width: 284.72px;
+  height: 391.76px;
+  left: -19px;
+  top: 548px;
+  transform: rotate(129.5deg);
+  transform-origin: top left;
+}
+
+/* Цветок — дополнительный, нижний левый угол */
+.flower-bottom-left-extra {
+  width: 180px;
+  height: 250px;
+  left: 30px;
+  top: 650px;
+  transform: rotate(39.4deg);
+  transform-origin: top left;
+}
+
+/* Текстовый блок обложки — имена, дата, надпись */
+.cover-copy {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  color: var(--ink);
+  text-align: left;
+}
+
+/* Имя — жених и невеста */
 .name {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: RoseVersailles1, 'Times New Roman', serif;
-    font-size: 51.571px;
-    line-height: 70px;
-    white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-rose);
+  font-size: 51.571px;
+  line-height: 70px;
+  white-space: nowrap;
 }
 
 .name-groom {
-    top: 360px;
-}
-
-.ampersand {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 437px;
-    font-family: Newston, Georgia, serif;
-    font-size: 54px;
-    line-height: 55px;
+  top: 360px;
 }
 
 .name-bride {
-    top: 477.96px;
+  top: 477.96px;
 }
 
+/* Амперсанд — символ "&" между именами */
+.ampersand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 437px;
+  font-family: var(--font-newston);
+  font-size: 54px;
+  line-height: 55px;
+}
+
+/* Надпись "приглашаем на свадьбу" */
 .invite-label {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 569px;
-    font-family: Sensal, Arial, sans-serif;
-    font-size: 9.2px;
-    line-height: 21px;
-    white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 569px;
+  font-family: var(--font-sensal);
+  font-size: 9.2px;
+  line-height: 21px;
+  white-space: nowrap;
 }
 
+/* Дата свадьбы */
 .date {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 594px;
-    font-family: Cruinn, 'Arial Narrow', Arial, sans-serif;
-    font-size: 26.96px;
-    font-weight: 100;
-    line-height: 28px;
-    letter-spacing: .1px;
-    white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 594px;
+  font-family: var(--font-cruinn);
+  font-size: 26.96px;
+  font-weight: 100;
+  line-height: 28px;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
 }
 
-.script{font-family:RoseVersailles1,'Times New Roman',serif;font-weight:400;color:var(--ink)}
-.heading{position:absolute;white-space:nowrap}
-.body{font-family:Doloman,Arial,sans-serif;font-weight:300;color:var(--ink);margin:0}
+/* ==========================================================================
+   8. SCREEN 3 — Основная информация
+   ========================================================================== */
 
-/* middle starts immediately after the invitation cover */
-.middle{top:1752px;height:1351px}
-.marble-paper{background:rgba(255,255,255,.71) url('assets/712009eecc960045da531e87a6c67feb47c7be3f') center/cover no-repeat}
-.middle-flower-1{width:288.44px;height:396.89px;left:132px;top:586px;transform:rotate(-39.4deg);transform-origin:top left;opacity:.98}
-.middle-flower-2{width:284.72px;height:391.76px;left:15.92px;top:1047px;transform:rotate(129.5deg);transform-origin:top left;opacity:.98}
-.guests{left:54px;top:93px;width:294px;text-align:center;font-size:36.874px;line-height:50px}
-.intro-text{position:absolute;left:77px;top:161px;width:245px;height:89px;text-align:center;font-size:14.781px;line-height:22.25px}
-.ring-card{position:absolute;left:77px;top:300px;width:247px;height:370.5px;overflow:hidden;border-radius:2px;z-index:4}
-.ring-card img{width:100%;height:100%;object-fit:cover;display:block}
-.star{position:absolute;left:55px;top:280px;width:46px;height:46px;font-size:32px;line-height:46px;text-align:center;z-index:5;color:#777}
-.venue-title{left:86px;top:781px;width:220px;text-align:center;font-size:26.165px;line-height:70px}
-.venue-photo{position:absolute;left:46px;top:868px;width:309px;height:309px;overflow:hidden;border-radius:50%;z-index:4}
-.venue-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.venue-info{position:absolute;left:46px;top:1184px;width:303px;height:64px;text-align:left;font-size:14.676px;line-height:32px;z-index:5}
-.vine{position:absolute;pointer-events:none;z-index:2;opacity:.9}
-.vine-left{width:132px;height:497px;left:347px;top:639px;transform:rotate(-90deg);transform-origin:top left}
-.venue-vine{position:absolute;left:-16px;top:1300px;width:256px;height:491px;transform:rotate(-8.8deg);z-index:2;overflow:hidden;opacity:.95}
-.venue-vine img{width:100%;height:100%;object-fit:contain}
+/* Основная информация — контейнер третьего экрана */
+.middle {
+  top: 1752px;
+  height: 1351px;
+}
 
-/* final screen */
-.final{top:3103px;height:878px}
-.bottom-photo{left:0;top:12px;width:521px;height:926px;background:url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b') center/cover no-repeat}
-.bottom-paper{background:rgba(255,255,255,.91)}
-.flower-bottom-right{width:288.44px;height:396.89px;left:132px;top:112px;transform:rotate(-39.4deg);transform-origin:top left}
-.flower-bottom-left{width:284.72px;height:391.76px;left:15.92px;top:573px;transform:rotate(129.5deg);transform-origin:top left}
-.waiting{left:41px;top:470px;width:333px;text-align:center;font-size:38.74px;line-height:52px}
-.note{position:absolute;left:99.25px;top:527.63px;width:193.55px;text-align:center;font-family:Doloman,Arial,sans-serif;font-size:20.659px;font-weight:300;line-height:20px;white-space:nowrap}
+/* Мраморный фон — текстура для третьего экрана */
+.marble-paper {
+  background:
+    var(--overlay-paper-translucent)
+    url('assets/712009eecc960045da531e87a6c67feb47c7be3f.png') center / cover no-repeat;
+}
 
-@media (min-width:394px){
-  body{padding:30px 0}
-  .stage{box-shadow:0 12px 50px rgba(0,0,0,.18)}
+/* Цветочные декорации на основном экране */
+.middle-flower-1 {
+  width: 288.44px;
+  height: 396.89px;
+  left: 132px;
+  top: 586px;
+  transform: rotate(-39.4deg);
+  transform-origin: top left;
+  opacity: 0.98;
+}
+
+.middle-flower-2 {
+  width: 284.72px;
+  height: 391.76px;
+  left: 15.92px;
+  top: 1047px;
+  transform: rotate(129.5deg);
+  transform-origin: top left;
+  opacity: 0.98;
+}
+
+/* Лоза — декоративный элемент слева */
+.vine-left {
+  width: 132px;
+  height: 497px;
+  left: 347px;
+  top: 670px;
+  transform: rotate(-90deg);
+  transform-origin: top left;
+}
+
+/* Декоративная картинка — над заголовком "Дорогие гости" */
+.guests-decor {
+  position: absolute;
+  left: 0;
+  top: 500px;
+  width: 400px;
+  height: 500px;
+  transform: rotate(90deg);
+  z-index: 2;
+}
+
+.guests-decor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Заголовок "Дорогие гости" */
+.guests {
+  left: 54px;
+  top: 93px;
+  width: 294px;
+  text-align: center;
+  font-size: 36.874px;
+  line-height: 50px;
+}
+
+/* Вступительный текст — приветствие гостям */
+.intro-text {
+  position: absolute;
+  left: 77px;
+  top: 161px;
+  width: 245px;
+  height: 89px;
+  text-align: center;
+  font-size: 14.781px;
+  line-height: 22.25px;
+}
+
+/* Карточка с кольцами — фото обручальных колец */
+.ring-card {
+  position: absolute;
+  left: 77px;
+  top: 300px;
+  width: 247px;
+  height: 370.5px;
+  overflow: hidden;
+  border-radius: 50px 50px 50px 50px;
+  z-index: 4;
+}
+
+.ring-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Декоративная звёздочка — символ ✦ */
+.star {
+  position: absolute;
+  left: 55px;
+  top: 280px;
+  width: 46px;
+  height: 46px;
+  font-size: 32px;
+  line-height: 46px;
+  text-align: center;
+  z-index: 5;
+  color: var(--star-color);
+}
+
+/* Заголовок "Место и время проведения" */
+.venue-title {
+  left: 86px;
+  top: 781px;
+  width: 220px;
+  text-align: center;
+  font-size: 26.165px;
+  line-height: 35px;
+  white-space: normal;
+}
+
+/* Фото ресторана — круглое изображение */
+.venue-photo {
+  position: absolute;
+  left: 46px;
+  top: 868px;
+  width: 309px;
+  height: 309px;
+  overflow: hidden;
+  border-radius: 50px 50px 2px 2px;
+  z-index: 4;
+}
+
+.venue-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Информация о месте — адрес и время */
+.venue-info {
+  position: absolute;
+  left: 46px;
+  top: 1184px;
+  width: 303px;
+  height: 64px;
+  text-align: left;
+  font-size: 14.676px;
+  line-height: 32px;
+  z-index: 5;
+}
+
+/* Лоза у ресторана — декоративный элемент снизу */
+.venue-vine {
+  position: absolute;
+  left: -16px;
+  top: 1300px;
+  width: 256px;
+  height: 491px;
+  transform: rotate(-8.8deg);
+  z-index: 2;
+  overflow: hidden;
+  opacity: 0.95;
+}
+
+.venue-vine img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ==========================================================================
+   9. SCREEN 4 — Завершение
+   ========================================================================== */
+
+/* Завершение — контейнер четвёртого экрана */
+.final {
+  top: 3103px;
+  height: 878px;
+}
+
+/* Нижнее фото — фон последнего экрана */
+.bottom-photo {
+  left: 0;
+  top: 12px;
+  width: 521px;
+  height: 926px;
+  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
+}
+
+/* Бумага — полупрозрачный overlay */
+.bottom-paper {
+  background: var(--overlay-paper);
+}
+
+/* Цветочные декорации на завершении */
+.flower-bottom-right {
+  width: 288.44px;
+  height: 396.89px;
+  left: 132px;
+  top: 112px;
+  transform: rotate(-39.4deg);
+  transform-origin: top left;
+}
+
+.flower-bottom-left {
+  width: 284.72px;
+  height: 391.76px;
+  left: 15.92px;
+  top: 573px;
+  transform: rotate(129.5deg);
+  transform-origin: top left;
+}
+
+/* Цветок — дополнительный, нижний левый угол */
+.flower-final-extra {
+  width: 288.44px;
+  height: 396.89px;
+  left: 52px;
+  top: 550px;
+  transform: rotate(39.4deg);
+  transform-origin: top left;
+}
+
+/* Декоративная картинка — над текстом "Ждем Всех Вас" */
+.waiting-decor {
+  position: absolute;
+  left: -10;
+  top: -200px;
+  width: 393px;
+  height: 470px;
+  transform: rotate(-90deg);
+  z-index: 10;
+}
+
+.waiting-decor img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Текст "Ждем Всех Вас" */
+.waiting {
+  left: 41px;
+  top: 470px;
+  width: 333px;
+  text-align: center;
+  font-size: 38.74px;
+  line-height: 52px;
+}
+
+/* Примечание "просьба не опаздывать" */
+.note {
+  position: absolute;
+  left: 99.25px;
+  top: 527.63px;
+  width: 193.55px;
+  text-align: center;
+  font-family: var(--font-doloman);
+  font-size: 20.659px;
+  font-weight: 300;
+  line-height: 20px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   10. RESPONSIVE — адаптивность для экранов шире 393px
+   ========================================================================== */
+
+@media (min-width: 394px) {
+  body {
+    padding: 30px 0;
+  }
+
+  .stage {
+    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.18);
+  }
 }

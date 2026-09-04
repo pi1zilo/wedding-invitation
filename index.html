@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
@@ -8,24 +8,36 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Stage — визуальный контейнер, центрирует design на экране -->
   <div class="stage" id="stage">
+
+    <!-- Design — фиксированный макет 393×3981, масштабируется через CSS -->
     <main class="design" id="design">
 
-      <!-- SCREEN 1: exactly the separate Figma "Нажми" page -->
+      <!-- ================================================================
+           SCREEN 1 — Заставка "Нажми"
+           Первый экран при открытии. Скрывается при нажатии на кнопку.
+           ================================================================ -->
       <section class="screen click-screen" aria-label="Открыть приглашение">
         <div class="click-bg"></div>
-        <img class="click-flower click-flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae" alt="">
-        <img class="click-flower click-flower-bottom" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e" alt="">
+        <img class="click-flower click-flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
+        <img class="click-flower click-flower-bottom" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
+        <img class="click-flower click-flower-bottom-extra" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
         <div class="frame-line"></div>
         <button class="click-button" id="openInvite" type="button">Нажми</button>
       </section>
 
-      <!-- SCREEN 2: invitation -->
+      <!-- ================================================================
+           SCREEN 2 — Обложка приглашения
+           Имена, амперсанд, надпись "приглашаем", дата.
+           ================================================================ -->
       <section class="screen invitation" id="invitation" aria-label="Приглашение">
         <div class="photo-bg top-photo"></div>
         <div class="paper top-paper"></div>
-        <img class="flower flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae" alt="">
-        <img class="flower flower-top-left" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e" alt="">
+        <img class="flower flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
+        <img class="flower flower-top-left" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
+        <img class="flower flower-bottom-left-extra" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
 
         <div class="cover-copy">
           <div class="name name-groom">Таштемир</div>
@@ -36,42 +48,64 @@
         </div>
       </section>
 
-      <!-- SCREEN 3: main information -->
+      <!-- ================================================================
+           SCREEN 3 — Основная информация
+           Приветствие, кольца, место/время, фото ресторана.
+           ================================================================ -->
       <section class="screen middle" aria-label="Основная информация">
         <div class="paper marble-paper"></div>
-        <img class="flower middle-flower-1" src="assets/8765933c27514af3e29b52871340b8d1739128ae" alt="">
-        <img class="flower middle-flower-2" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e" alt="">
-        <img class="vine vine-left" src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf" alt="">
+        <img class="flower middle-flower-1" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
+        <img class="flower middle-flower-2" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
+        <img class="vine vine-left" src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf.png" alt="">
 
+        <div class="guests-decor">
+          <img src="assets/144199ce96c8b1ba1f2489e30dfbe5d13323ea7c.png" alt="">
+        </div>
         <div class="script heading guests">Дорогие гости</div>
-        <p class="body intro-text">Мы рады сообщить вам, что состоится самое главное торжество в нашей жизни - день нашей свадьбы!<br>Приглашаем вас разделить с нами радость этого незабываемого дня</p>
+        <p class="body intro-text">
+          Мы рады сообщить вам, что состоится самое главное торжество в нашей жизни - день нашей свадьбы!<br>
+          Приглашаем вас разделить с нами радость этого незабываемого дня
+        </p>
 
         <div class="ring-card">
-          <img src="assets/4199d186d9358abc7ed3bdfa2811c28f59261ebe" alt="Обручальные кольца">
+          <img src="assets/4199d186d9358abc7ed3bdfa2811c28f59261ebe.jpg" alt="Обручальные кольца">
         </div>
-        <div class="star">✦</div>
+        <div class="star">&#10038;</div>
 
-        <div class="script heading venue-title">Место и время проведения</div>
+        <div class="script heading venue-title">Место и время<br>проведения</div>
         <div class="venue-photo">
-          <img src="assets/b7468d1ef33bb008a90e2e8f0fb2f18b695f93f4" alt="Aalam Event Hall">
+          <img src="assets/b7468d1ef33bb008a90e2e8f0fb2f18b695f93f4.jpg" alt="Aalam Event Hall">
         </div>
-        <p class="body venue-info">Ресторан Aalam Event Hall, Ул. 7 Апреля, Бишкек<br>27.09.2026 в 17:00</p>
+        <p class="body venue-info">
+          Ресторан Aalam Event Hall, Ул. 7 Апреля, Бишкек<br>
+          27.09.2026 в 17:00
+        </p>
 
-        <div class="venue-vine"><img src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf" alt=""></div>
+        <div class="venue-vine">
+          <img src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf.png" alt="">
+        </div>
       </section>
 
-      <!-- SCREEN 4: final -->
+      <!-- ================================================================
+           SCREEN 4 — Завершение
+           "Ждем Всех Вас" + просьба не опаздывать.
+           ================================================================ -->
       <section class="screen final" aria-label="Завершение приглашения">
         <div class="photo-bg bottom-photo"></div>
         <div class="paper bottom-paper"></div>
-        <img class="flower flower-bottom-right" src="assets/8765933c27514af3e29b52871340b8d1739128ae" alt="">
-        <img class="flower flower-bottom-left" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e" alt="">
+        <img class="flower flower-bottom-right" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
+        <img class="flower flower-bottom-left" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
+        <img class="flower flower-final-extra" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
+        <div class="waiting-decor">
+          <img src="assets/121738b93bb1b86ac5812cfe4e5c0439b443b340.png" alt="">
+        </div>
         <div class="script heading waiting">Ждем Всех Вас</div>
         <div class="script note">просьба не опаздывать</div>
       </section>
 
     </main>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
