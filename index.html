@@ -15,12 +15,14 @@
     <!-- Design — фиксированный макет 393×3981, масштабируется через CSS -->
     <main class="design" id="design">
 
+      <!-- Постоянный фон — виден всегда, не исчезает -->
+      <div class="persistent-bg"></div>
+
       <!-- ================================================================
            SCREEN 1 — Заставка "Нажми"
-           Первый экран при открытии. Скрывается при нажатии на кнопку.
+           Только кнопка и декорации (фон отдельный слой)
            ================================================================ -->
       <section class="screen click-screen" aria-label="Открыть приглашение">
-        <div class="click-bg"></div>
         <img class="click-flower click-flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
         <img class="click-flower click-flower-bottom" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
         <img class="click-flower click-flower-bottom-extra" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
@@ -33,8 +35,6 @@
            Имена, амперсанд, надпись "приглашаем", дата.
            ================================================================ -->
       <section class="screen invitation" id="invitation" aria-label="Приглашение">
-        <div class="photo-bg top-photo"></div>
-        <div class="paper top-paper"></div>
         <img class="flower flower-top" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
         <img class="flower flower-top-left" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
         <img class="flower flower-bottom-left-extra" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
@@ -54,9 +54,6 @@
            ================================================================ -->
       <section class="screen middle" aria-label="Основная информация">
         <div class="paper marble-paper"></div>
-        <img class="flower middle-flower-1" src="assets/8765933c27514af3e29b52871340b8d1739128ae.png" alt="">
-        <img class="flower middle-flower-2" src="assets/dae64a36e5014cce9aa5fe1a4be5db7ea29d1c7e.png" alt="">
-        <img class="vine vine-left" src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf.png" alt="">
 
         <div class="guests-decor">
           <img src="assets/144199ce96c8b1ba1f2489e30dfbe5d13323ea7c.png" alt="">
@@ -81,9 +78,6 @@
           27.09.2026 в 17:00
         </p>
 
-        <div class="venue-vine">
-          <img src="assets/548f5207212aa38e396a92d52682e7f6e473f9cf.png" alt="">
-        </div>
       </section>
 
       <!-- ================================================================
@@ -106,6 +100,9 @@
     </main>
   </div>
 
+  <audio id="bgMusic" loop>
+    <source src="music/music.mp3" type="audio/mpeg">
+  </audio>
   <script src="script.js"></script>
 </body>
 </html>

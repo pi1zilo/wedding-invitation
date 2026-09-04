@@ -120,6 +120,24 @@ body {
   overflow: hidden;
 }
 
+/* Постоянный фон — виден всегда, не исчезает при переходе */
+.persistent-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 393px;
+  height: 1752px;
+  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
+  z-index: 0;
+}
+
+.persistent-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-white);
+}
+
 /* ==========================================================================
    5. COMMON — общие стили для экранов и типографики
    ========================================================================== */
@@ -129,7 +147,6 @@ body {
   position: absolute;
   left: 0;
   width: 393px;
-  overflow: hidden;
 }
 
 /* Типографика — общий стиль шрифтов */
@@ -177,26 +194,12 @@ body {
    6. SCREEN 1 — Заставка "Нажми"
    ========================================================================== */
 
-/* Заставка — контейнер первого экрана */
+/* Заставка — контейнер первого экрана (только кнопка и декорации) */
 .click-screen {
   top: 0;
   height: 876px;
-  background: var(--bg-stage);
   z-index: 20;
-}
-
-/* Фон заставки — изображение с белым наложением */
-.click-bg {
-  position: absolute;
-  inset: 0;
-  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
-}
-
-.click-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: var(--overlay-white);
+  opacity: 1;
 }
 
 /* Декоративная рамка — обводка по краям экрана */
@@ -274,6 +277,7 @@ body {
 
 /* Состояние заставки — после нажатия кнопки */
 .click-screen.hide {
+  opacity: 0;
   pointer-events: none;
 }
 
@@ -281,24 +285,16 @@ body {
    7. SCREEN 2 — Обложка приглашения
    ========================================================================== */
 
-/* Обложка — контейнер второго экрана */
+/* Обложка — контейнер второго экрана (прозрачный, фон постоянный) */
 .invitation {
   top: 876px;
   height: 876px;
+  opacity: 0;
 }
 
-/* Фоновое фото — смещённое изображение */
-.top-photo {
-  left: -95px;
-  top: -50px;
-  width: 521px;
-  height: 926px;
-  background: url('assets/e3d6e603c62d3b400bec4aa2d8f8170daf63b92b.png') center / cover no-repeat;
-}
-
-/* Полупрозрачная бумага —.overlay поверх фото */
-.top-paper {
-  background: var(--overlay-paper);
+/* Обложка — видимое состояние после crossfade */
+.invitation.show {
+  opacity: 1;
 }
 
 /* Цветочные декорации на обложке */
@@ -322,11 +318,11 @@ body {
 
 /* Цветок — дополнительный, нижний левый угол */
 .flower-bottom-left-extra {
-  width: 180px;
-  height: 250px;
-  left: 30px;
-  top: 650px;
-  transform: rotate(39.4deg);
+  width: 288.44px;
+  height: 396.89px;
+  left: 80px;
+  top: 600px;
+  transform: rotate(50deg);
   transform-origin: top left;
 }
 
@@ -403,6 +399,7 @@ body {
 .middle {
   top: 1752px;
   height: 1351px;
+  overflow: hidden;
 }
 
 /* Мраморный фон — текстура для третьего экрана */
@@ -410,27 +407,6 @@ body {
   background:
     var(--overlay-paper-translucent)
     url('assets/712009eecc960045da531e87a6c67feb47c7be3f.png') center / cover no-repeat;
-}
-
-/* Цветочные декорации на основном экране */
-.middle-flower-1 {
-  width: 288.44px;
-  height: 396.89px;
-  left: 132px;
-  top: 586px;
-  transform: rotate(-39.4deg);
-  transform-origin: top left;
-  opacity: 0.98;
-}
-
-.middle-flower-2 {
-  width: 284.72px;
-  height: 391.76px;
-  left: 15.92px;
-  top: 1047px;
-  transform: rotate(129.5deg);
-  transform-origin: top left;
-  opacity: 0.98;
 }
 
 /* Лоза — декоративный элемент слева */
@@ -684,5 +660,16 @@ body {
 
   .stage {
     box-shadow: 0 12px 50px rgba(0, 0, 0, 0.18);
+  }
+}
+
+/* ==========================================================================
+   11. REDUCED MOTION — ускорение анимаций для пользователей с ограничениями
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .click-screen,
+  .invitation {
+    transition-duration: 100ms !important;
   }
 }

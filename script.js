@@ -6,34 +6,67 @@
 /**
  * Приглашение — переход от заставки к основному контенту.
  *
- * При нажатии на кнопку "Нажми" (экран 1):
- * 1. Заставка плавно исчезает (opacity → 0)
- * 2. Страница плавно прокручивается к экрану 2 (приглашение)
+ * Последовательность:
+ * 1. Кнопка и цветки плавно исчезают (opacity 1 → 0)
+ * 2. Мгновенный переход к позиции второго экрана
+ * 3. Информация плавно проявляется (opacity 0 → 1)
+ * 4. Фон остаётся видимым всегда
  */
 
 (function () {
   'use strict';
 
-  const SCREEN_WIDTH = 393;   // ширина design-макета в px
-  const SCREEN_HEIGHT = 876;  // высота одного экрана в px
+  var SCREEN_WIDTH = 393;
+  var SCREEN_HEIGHT = 876;
+  var FADE_OUT_MS = 600;
+  var FADE_IN_MS = 800;
 
-  // DOM-элементы
-  const openButton = document.getElementById('openInvite');
-  const clickScreen = document.querySelector('.click-screen');
+  var isTransitioning = false;
 
-  if (!openButton || !clickScreen) return;
+  var openButton = document.getElementById('openInvite');
+  var clickScreen = document.querySelector('.click-screen');
+  var invitation = document.querySelector('.invitation');
+  var bgMusic = document.getElementById('bgMusic');
+
+  if (!openButton || !clickScreen || !invitation) return;
+
+  // Блокируем скролл до перехода
+  document.body.style.overflow = 'hidden';
 
   openButton.addEventListener('click', function () {
-    // Скрываем заставку
-    clickScreen.classList.add('hide');
+    if (isTransitioning) return;
+    isTransitioning = true;
 
-    // Вычисляем текущий масштаб (аналогично CSS var(--scale))
     var currentScale = Math.min(1, window.innerWidth / SCREEN_WIDTH);
+    var targetScroll = SCREEN_HEIGHT * currentScale;
 
-    // Плавно прокручиваем к первому экрану приглашения
-    window.scrollTo({
-      top: SCREEN_HEIGHT * currentScale,
-      behavior: 'smooth'
-    });
+    // Шаг 1: Плавно исчезают кнопка и цветки
+    clickScreen.style.transition = 'opacity ' + FADE_OUT_MS + 'ms ease-in-out';
+    clickScreen.style.opacity = '0';
+
+    // Запускаем музыку
+    if (bgMusic) {
+      bgMusic.play().then(function () {
+        console.log('Музыка запущена');
+      }).catch(function (error) {
+        console.error('Ошибка запуска музыки:', error);
+      });
+    }
+
+    setTimeout(function () {
+      // Шаг 2: Мгновенный переход к позиции второго экрана
+      window.scrollTo(0, targetScroll);
+
+      // Шаг 3: Плавно проявляется информация
+      invitation.style.transition = 'opacity ' + FADE_IN_MS + 'ms ease-in-out';
+      invitation.style.opacity = '1';
+
+      setTimeout(function () {
+        // Шаг 4: Разрешаем скролл
+        document.body.style.overflow = '';
+        clickScreen.style.pointerEvents = 'none';
+      }, FADE_IN_MS);
+
+    }, FADE_OUT_MS);
   });
 })();
