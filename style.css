@@ -439,11 +439,11 @@ body {
 
 /* Заголовок "Дорогие гости" */
 .guests {
-  left: 54px;
+  left: 20px;
   top: 93px;
   width: 294px;
   text-align: center;
-  font-size: 36.874px;
+  font-size: 27px;
   line-height: 50px;
 }
 
@@ -495,7 +495,7 @@ body {
 /* Заголовок "Место и время проведения" */
 .venue-title {
   left: 86px;
-  top: 781px;
+  top: 755px;
   width: 220px;
   text-align: center;
   font-size: 26.165px;
@@ -503,7 +503,7 @@ body {
   white-space: normal;
 }
 
-/* Фото ресторана — круглое изображение */
+/* Фото ресторана — изображение */
 .venue-photo {
   position: absolute;
   left: 46px;
@@ -627,11 +627,11 @@ body {
 
 /* Текст "Ждем Всех Вас" */
 .waiting {
-  left: 41px;
+  left: 24px;
   top: 470px;
   width: 333px;
   text-align: center;
-  font-size: 38.74px;
+  font-size: 35px;
   line-height: 52px;
 }
 
